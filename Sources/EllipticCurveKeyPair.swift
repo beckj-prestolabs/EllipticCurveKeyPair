@@ -865,9 +865,13 @@ public enum EllipticCurveKeyPair {
         }
         
         public static var isSimulator: Bool {
-            return TARGET_OS_SIMULATOR != 0
+            #if targetEnvironment(simulator)
+                return true
+            #else
+                return false
+            #endif
         }
-        
+
         public static var hasSecureEnclave: Bool {
             return hasTouchID && !isSimulator
         }
